@@ -38,7 +38,7 @@ function generatePassword() {
     typesArr.push('0123456789');
   };
   if(window.confirm("Would you like to include symbols?")){
-    typesArr.push("!#$%&()+,-./<=>?@[]_{|}~");
+    typesArr.push("!#$%&()*+,-./:;<=>?@[\]^_{|}~");
   };
 
     let randomPassword = getRandChar(typesArr, length)
