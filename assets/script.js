@@ -18,7 +18,11 @@ function generatePassword() {
  
   //prompt for length
   let length = parseInt(prompt("Choose a password length between 8 and 128 characters."));
-  if (length < 8 || length > 128) {
+  if(isNaN(length)) {
+    window.alert("you have not entered a valid number character. Please enter only numbers.")
+    return generatePassword();
+  }
+  else if (length < 8 || length > 128) {
     window.alert("You have not entered a valid number between 8 and 128. Please try again.");
   return generatePassword();
   };
