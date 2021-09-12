@@ -15,10 +15,10 @@ function writePassword() {
 //generates password after prompting for criteria
 function generatePassword() {
   let generatedPassword = "";
-  const number = getRandomNumber();
-  const upper = getRandomUpper();
-  const lower = getRandomLower();
-  const symbol = getRandomSymbol();
+  const number = '0123456789';
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
+  const symbol = '!#$%&()*+,-./:;<=>?@[\]^_{|}~';
   //prompt for length
   let length = parseInt(prompt("Choose a password length between 8 and 128 characters."));
   if (length < 8 || length > 128) {
@@ -27,7 +27,10 @@ function generatePassword() {
   };
 
   //too choose which character types to use
+  //my properties array
+  
   let typesArr = [];
+
   if (window.confirm("Would you like to inlude uppercase letters?")){
     typesArr.push({upper});
   };
@@ -41,6 +44,9 @@ function generatePassword() {
     typesArr.push({symbol})
   };
 
+
+
+
 debugger;
   for (let i = 0; i < length; i++) {
     typesArr.forEach(type => {
@@ -49,6 +55,10 @@ debugger;
     });
   };
   debugger;
+
+
+
+
   var finalPassword = generatedPassword;
   document.getElementById("password")
   return ("password").innerHTML = finalPassword;
@@ -71,16 +81,3 @@ debugger;
     //symbol: getRandomSymbol
 //};
 
-function getRandomLower(){
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-};
-function getRandomUpper(){
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-};
-function getRandomNumber(){
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-};
-function getRandomSymbol(){
-   const symbols = '!#$%&()*+,-./:;<=>?@[\]^_{|}~';
-   return symbols [Math.floor(Math.random() * symbols.length)] ;
-};
