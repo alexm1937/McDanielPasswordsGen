@@ -1,45 +1,86 @@
-//var sym = '!#$%&()*+,-./:;<=>?@[\]^_`{|}~';
-//var lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-//var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//var num = '0123456789';
+//DOM elements
+const resultEl = document.getElementById('results');
+const lengthEl = document.getElementById('length');
+const uppercaseEl = document.getElementById('upper');
+const lowercaseEl = document.getElementById('lower');
+const numbersEl = document.getElementById('numbers');
+const symbolsEl = document.getElementById('symbols');
+const generateEl = document.getElementById('generate');
+const clipboardEl = document.getElementById('clipboard');
 
-var passlength = function(){  
-  let passlength = Number(prompt("Choose a password length between 8 and 128 characters."));
-    if (Number < 8 || Number > 128) {
-      window.alert("You have not entered a valid number between 8 and 128. Please try again.");
-    return passlength(); 
+const randomFunc = {
+    lower: getRandomLower,
+    upper: getRandomUpper,
+    number: getRandomNumber,
+    symbol: getRandomSymbol
+};
+
+//generateEl.addEventListener('click', () => {}
+generateEl.addEventListener('click', () => {
+    const length = +lengthEl.value;
+    const hasLower = lowercaseEl.checked;
+    const hasUpper = uppercaseEl.checked;
+    const hasNumber = numbersEl.checked; 
+    const hasSymbol = symbolsEl.checked;
+
+ resultEl.innerText = generatedPassword(
+       hasLower, 
+        hasUpper,
+        hasSymbol,
+        hasNumber,
+        length
+    );
+});
+
+function generatePassword (lower, upper, number, symbol, length) {
+    //init pw var, filter outunchecked, loop  over length call
+    let generatedPassword = "";
+    const typesCount = lower + upper + number + symbol;
+    const typesArr = [{lower}, {upper}, {number}, {symbol}].filter
+    (
+    item => Object.values(item)[0]
+    );
+
+    if(typesCount === 0) {
+        return '';
     }
-  };
 
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+    for (let i = 0; i < length; i += typesCount) {
+        typesArr.forEach(type => {
+            const funcName = Object.keys(type)[0];
+            
+            generatedPassword += randomFunc[funcName]();
+        });
+    }
+    var finalPassword = generatedPassword;
+    document.getElementById
+    return finalPassword("password").innerHTML = finalPassword;
+}
+function getRandomLower(){
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+}
+function getRandomUpper(){
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+}
+function getRandomNumber(){
+    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+function getRandomSymbol(){
+   const symbols = '!#$%&()*+,-./:;<=>?@[\]^_{|}~';
+   return symbols [Math.floor(Math.random() * symbols.length)] ;
 }
 
-function generatePassword() {
-  var pass = "";
-  var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var length = passlength();    
-  for (i = 1; i <= length; i++) {
-    var char  = Math.floor(Math.random() * str.length + 1);
-    pass += str.charAt(char)
-}
-}
- //if  'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$';
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 
 
-function passLength() {
-  var length = window.prompt("Please choose a password length between 8 and 128 characters.");
-  if (length <= 7 || length >= 129) {
-      window.alert("You have not entered a valid number between 8 and 128. Please try again.");
-  return passLength();
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
