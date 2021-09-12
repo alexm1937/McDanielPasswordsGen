@@ -15,10 +15,7 @@ function writePassword() {
 //generates password after prompting for criteria
 function generatePassword() {
   let generatedPassword = "";
-  const number = '0123456789';
-  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lower = 'abcdefghijklmnopqrstuvwxyz';
-  const symbol = '!#$%&()*+,-./:;<=>?@[\]^_{|}~';
+ 
   //prompt for length
   let length = parseInt(prompt("Choose a password length between 8 and 128 characters."));
   if (length < 8 || length > 128) {
@@ -28,56 +25,33 @@ function generatePassword() {
 
   //too choose which character types to use
   //my properties array
-  
+
   let typesArr = [];
 
   if (window.confirm("Would you like to inlude uppercase letters?")){
-    typesArr.push({upper});
+    typesArr.push('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
   };
   if(window.confirm("Would you like to include lowercase letters?")){
-    typesArr.push({lower});
+    typesArr.push('abcdefghijklmnopqrstuvwxyz');
   };
   if(window.confirm("Would you like to include numbers?")){
-    typesArr.push({number});
+    typesArr.push('0123456789');
   };
   if(window.confirm("Would you like to include symbols?")){
-    typesArr.push({symbol})
+    typesArr.push("!#$%&()+,-./<=>?@[]_{|}~");
   };
 
-
-
-
-debugger;
-  for (let i = 0; i < length; i++) {
-    typesArr.forEach(type => {
-        const funcName = Object.keys(type)[0];
-        generatedPassword += 
-    });
+    let randomPassword = getRandChar(typesArr, length)
+    return randomPassword;
   };
-  debugger;
-
-
-
-
-  var finalPassword = generatedPassword;
-  document.getElementById("password")
-  return ("password").innerHTML = finalPassword;
+function getRandChar(typesArr, length) {
+  let charString;
+  let newChar;
+  let password = "";
+for(i = 0; i < length; i++) {
+charString = typesArr[Math.floor(Math.random() * typesArr.length)]
+newChar = charString.charAt(Math.floor(Math.random() * charString.length));
+password = password + newChar;
 }
-
- //if  'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$';
-// Add event listener to generate button
-
-
-
-//function to prompt for length
-//var passChar = function(){}
-    
-
-  //rand funcs, not mine
-//const randomFunc = {
-  //  lower: getRandomLower,
-    //upper: getRandomUpper,
-    //number: getRandomNumber,
-    //symbol: getRandomSymbol
-//};
-
+return password;
+};
