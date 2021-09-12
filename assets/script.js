@@ -1,15 +1,60 @@
-// Assignment Code
-// Write password to the #password inpu
-//generator functions
-const resultEl
+//DOM elements
+const resultEl = document.getElementById('results');
+const lengthEl = document.getElementById('length');
+const uppercaseEl = document.getElementById('upper');
+const lowercaseEl = document.getElementById('lower');
+const numbersEl = document.getElementById('numbers');
+const symbolsEl = document.getElementById('symbols');
+const generateEl = document.getElementById('generate');
+const clipboardEl = document.getElementById('clipboard');
 
 const randomFunc = {
     lower: getRandomLower,
     upper: getRandomUpper,
     number: getRandomNumber,
-    symbol: getRandomSymbol,
+    symbol: getRandomSymbol
 };
 
+//generateEl.addEventListener('click', () => {}
+generateEl.addEventListener('click', () => {
+    const length = +lengthEl.value;
+    const hasLower = lowercaseEl.checked;
+    const hasUpper = uppercaseEl.checked;
+    const hasNumber = numbersEl.checked; 
+    const hasSymbol = symbolsEl.checked;
+
+ resultEl.innerText = generatePassword(
+        hasLower, 
+        hasUpper,
+        hasSymbol,
+        hasNumber,
+        length
+    );
+});
+
+function generatePassword (lower, upper, number, symbol, length) {
+    //init pw var, filter outunchecked, loop  over length call
+    let generatedPassword = "";
+    const typesCount = lower + upper + number + symbol;
+    const typesArr = [{lower}, {upper}, {number}, {symbol}].filter
+    (
+    item => Object.values(item)[0]
+    );
+
+    if(typesCount === 0) {
+        return '';
+    }
+
+    for (let i = 0; i < length; i += typesCount) {
+        typesArr.forEach(type => {
+            const funcName = Object.keys(type)[0];
+            
+            generatedPassword =+ randomFunc[funcName]();
+        });
+    }
+    var finalPassword = generatePassword(0, length);
+    return finalPassword
+}
 function getRandomLower(){
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
@@ -25,24 +70,16 @@ function getRandomSymbol(){
 }
 
 
-var generateBtn = document.querySelector("#generate");
-generateBtn.addEventListener("click", writePassword);
-
-function writePassword() {
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
-    passwordText.value = password;
-  };
-//pass info
 
 
-function generatePassword () {
-    var password = '';
-    str = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    for (i = 0; i <= length; i++) {
-    var password = Math.floor(Math.random() * passLength() + 1);
-    password += str.charAt(str)
-  }
-};
+
+
+
+
+
+
+
+
+
 
 
