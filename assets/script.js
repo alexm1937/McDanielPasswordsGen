@@ -4,7 +4,6 @@
 var generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", writePassword);
 
-
 // Writes password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -14,8 +13,6 @@ function writePassword() {
 
 //generates password after prompting for criteria
 function generatePassword() {
-  let generatedPassword = "";
- 
   //prompt for length
   let length = parseInt(prompt("Choose a password length between 8 and 128 characters."));
   if(isNaN(length)) {
@@ -28,8 +25,7 @@ function generatePassword() {
   };
 
   //too choose which character types to use
-  //my properties array
-
+  //chartype properties array
   let typesArr = [];
 
   if (window.confirm("Would you like to inlude uppercase letters?")){
@@ -44,18 +40,18 @@ function generatePassword() {
   if(window.confirm("Would you like to include symbols?")){
     typesArr.push("!#$%&()*+,-./:;<=>?@[\]^_{|}~");
   };
-
-    let randomPassword = getRandChar(typesArr, length)
-    return randomPassword;
+  let randomPassword = getRandChar(typesArr, length)
+  return randomPassword;
   };
-function getRandChar(typesArr, length) {
+  //random character function/loop
+  function getRandChar(typesArr, length) {
   let charString;
   let newChar;
   let password = "";
-for(i = 0; i < length; i++) {
-charString = typesArr[Math.floor(Math.random() * typesArr.length)]
-newChar = charString.charAt(Math.floor(Math.random() * charString.length));
-password = password + newChar;
-}
+  for(i = 0; i < length; i++) {
+  charString = typesArr[Math.floor(Math.random() * typesArr.length)]
+  newChar = charString.charAt(Math.floor(Math.random() * charString.length));
+  password = password + newChar;
+  }
 return password;
 };
